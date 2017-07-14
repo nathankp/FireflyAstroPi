@@ -46,7 +46,8 @@ def main():
         # begin main loop.
         for delta in schedule:
             # wait the `delta` between now and next reading time.
-            if delta > 0.001: time.sleep(delta)
+            if delta > 0.001: 
+                time.sleep(delta)
             # -------- BEGIN CORE PROGRAM LOGIC --------
                 export_data("temp","hum","pres","time","pos")
                 sense = SenseHat()
