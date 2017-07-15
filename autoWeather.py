@@ -51,7 +51,8 @@ def main():
         # begin main loop.
         for delta in schedule:
             # wait the `delta` between now and next reading time.
-            if delta > 0.001: time.sleep(delta)
+            if delta > 0.001: 
+                time.sleep(delta)
             # -------- BEGIN CORE PROGRAM LOGIC --------
          
             # write the actual logic if your program here,
