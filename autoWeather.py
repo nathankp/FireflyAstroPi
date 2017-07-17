@@ -35,7 +35,7 @@ def main():
     sense = SenseHat()
     sense.clear()
     # the logging interval (in seconds).
-    interval = 1
+    interval = 600
     # a generator which produces the target time of
     # the next reading.  Change its argument to whatever
     # interval you want to log at.
