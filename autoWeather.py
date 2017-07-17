@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
+import datetime
 import time
 import csv
 from itertools import count
 from sense_hat import SenseHat
+
+# Defines an int describing the time difference between GMT and Hawaii time
+HOURS = 10
+TIMEDIFFERENCE = 60 * 60 * HOURS
 
 # NOTE: To get this script to run startup, add it to `/etc/rc.local`.
 
@@ -30,13 +35,13 @@ def main():
     sense = SenseHat()
     sense.clear()
     # the logging interval (in seconds).
-    interval = 600
+    interval = 1
     # a generator which produces the target time of
     # the next reading.  Change its argument to whatever
     # interval you want to log at.
     schedule = make_schedule(interval)
-    # shortcut to generate current time.
-    now = lambda: int(time.time())
+    # Returns Hawaii time
+    now = lambda: int(time.time()) - TIMEDIFFERENCE
     # timestamp formatted
     nowFormat = lambda: datetime.datetime.fromtimestamp(now()).strftime('%Y-%m-%d %H:%M:%S')
     # list of headers for the csv file.
@@ -63,11 +68,11 @@ def main():
             hum = sense.get_humidity()
             pres = sense.get_pressure()
             pos = sense.get_compass_raw()
-            values = export_data(temp, hum, pres, pos)
+            values = export_data(temp,hum,pres,pos)
             # --------- END CORE PROGRAM LOGIC ---------
             # write the values to the target file, appending
             # the current time as the far right column.
-            writer.writerow((values, now(), nowFormat()))
+            writer.writerow((values,now(),nowFomat()))
             # force python3 to actually write the value immediately
             # instead of buffering (so we don't lose data when pgrm dies).
             fp.flush()
