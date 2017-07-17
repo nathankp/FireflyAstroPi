@@ -72,7 +72,7 @@ def main():
             # --------- END CORE PROGRAM LOGIC ---------
             # write the values to the target file, appending
             # the current time as the far right column.
-            writer.writerow((values,now(),nowFomat()))
+            writer.writerow((values,now(),nowFormat()))
             # force python3 to actually write the value immediately
             # instead of buffering (so we don't lose data when pgrm dies).
             fp.flush()
